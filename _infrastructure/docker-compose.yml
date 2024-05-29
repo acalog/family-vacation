@@ -1,0 +1,25 @@
+version: '3.1'
+
+services: 
+  laravel:
+    build: .
+    volumes:
+      - ../:/var/www/html/nh/
+    command: ["php-fpm"]
+
+  sp:
+    image: 339712746496.dkr.ecr.us-east-1.amazonaws.com/nh-prod-apache
+    volumes:
+      - ../:/var/www/html/nh/:ro
+    ports:
+      - 80:80
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+        MYSQL_DATABASE: laravel
+        MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    
