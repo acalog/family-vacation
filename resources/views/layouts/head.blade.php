@@ -6,6 +6,9 @@
     <meta name="author" content="">
     <meta name="theme-color" content="#F31561"/>
 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
