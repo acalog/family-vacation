@@ -5,40 +5,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ActionController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*
 Route::get('/welcome', function () {
     User::updateOrCreate(
-        ['email' => 'caloggero.a@gmail.com', 'name' => 'alex'],
-        ['password' => Hash::make('alex')]
+        ['email' => '', 'name' => ''],
+        ['password' => Hash::make('')]
     );
     return view('welcome');
 });
+*/
 
-Route::get('/hello', function () {
-    return 'Hello World';
-})->middleware('auth')->name('home');
+// Authentication
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 
-Route::get('/home', function () {
-    return view('content.home');
-});
+// Media Attachments
+Route::post('/upload', [MediaController::class, 'upload'])->name('upload');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('/login', function (Request $request) {
-    $password = $request->input('password');
-    $email    = $request->input('email');
-
-    if (Auth::attempt(['email' => $email, 'password' => $password])) {
-        $request->session()->regenerate();
-        return '200 OK';
-    }
-
-    return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ])->onlyInput('email');
-})->name('login');
+Route::get('/', [ActionController::class, 'home'])->name('home');

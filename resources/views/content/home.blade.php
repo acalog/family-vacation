@@ -1,6 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>Caloggeros in Italy</h1>
-<img src="{{ Storage::disk('s3')->url('20240522_120929.jpg') }}">
+@include('content.dashboard')
+    <div class="gallery">
+        <div class="gallery__column">
+            @foreach($images as $image)
+                @include('content.figure', ['filename' => $image->filename, 'description' => ''])
+            @endforeach
+        </div>
+    </div>
+    
+    
 @endsection

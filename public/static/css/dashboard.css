@@ -1,0 +1,112 @@
+.dashboard {
+    display: grid;
+    gap: 1ch;
+    & > * {
+      background: var(--bg, #EEE);
+      border-radius: 2ch;
+      color: hsl(215, 75%, 10%);
+      container-type: inline-size;
+      grid-column: var(--gc, auto);
+      grid-row: var(--gr, auto);
+      padding: 2ch;
+      & h2 {
+        margin-block: 0 1ch;
+      }
+    }
+    & table {
+      border-collapse: collapse;
+      width: 100%;
+      & td {
+        border-block-end: 1px solid;
+        padding-block: .66ch;
+      }
+      & th {
+        border-block-end: 4px double;
+        font-variant: small-caps;
+        font-weight: 500;
+        padding-block: 1ch 0.5ch;
+        text-align: start;
+        text-transform: lowercase;
+      }
+      & tr:nth-of-type(2) td { padding-block-start: 1.33ch; }
+      & :is(td,th):last-of-type { text-align: end; }
+    }
+    & ul {
+      all: unset;
+      display: grid;
+      gap: 1.5ch;
+      & li { list-style-position: inside; }
+    }
+  }
+
+  
+  /* Items */
+  .activity-feed {
+    --bg: linear-gradient(-45deg, #35C3F3 0%, #8b9fe8 20%, #e681d8 39%, #ffa9a4 76%, #FED2CE 100%);
+    & li {
+      border-block-end: 1px dashed hsl(215, 75%, 10%, .5);
+      line-height: 1.5;
+      list-style-type: "✓  ";
+      &::marker { font-size: 150%; }
+    }
+  }
+  .calories {
+    --bg: linear-gradient(45deg, #87CEFA 0%, #C0F0F1 20%, #A0E2EF 39%, #68B5EB 76%, #7CACD2 100%);
+    display: grid;
+    gap: 1ch;
+    grid-template-columns: repeat(2, 1fr);
+    & h2 { grid-column: span 2;}
+    & > div {
+      aspect-ratio: 1;
+      background-color: hsla(0, 100%, 100%, .33);
+      border-radius: 50%;
+      border: 2px solid;
+      display: grid;
+      font-size: 14cqi;
+      letter-spacing: -0.05em;
+      place-content: center;
+      text-align: center;
+      &:first-of-type {
+        grid-column: span 2;
+        place-self: center;
+        width: 55%;
+      }
+      & strong {
+        font-size: 6cqi;
+        font-variant: small-caps;
+        font-weight: 500;
+        letter-spacing: normal;
+        text-transform: lowercase;
+      }
+    }
+  }
+  .challenges { --bg: linear-gradient(-145deg, #35C3F3 0%, #8b9fe8 20%, #e681d8 39%, #ffa9a4 76%, #FED2CE 100%); }
+  :is(.challenges,.personal-bests) {
+    & li {
+      background: hsl(185 100% 98% / .8);
+      border-radius: 2.5ch;
+      display: block;
+      font-weight: 500;
+      padding: 1ch 2ch;
+    }
+  }
+  .exercise-table { --bg: linear-gradient(-45deg, #F7F1FF 0%, #E7FFEC 20%, #D1F9E7 39%, #BCD2E7 76%, #B8D0E5 100%) }
+  .personal-bests { --bg: linear-gradient(-95deg, #E6F8FF 0%, #B9F9EF 20%, #87F2E9 39%, #51D7E8 76%, #59C6D8 100%) }
+  .profile {
+    --bg: linear-gradient(45deg, #35C3F3 0%, #8b9fe8 20%, #e681d8 39%, #ffa9a4 76%, #FED2CE 100%);
+    font-size: 1.5em;
+    text-align: center;
+    & h2 { font-size: 9cqi; }
+  }
+  .schedule-table { --bg: linear-gradient(45deg, #87CEFA 0%, #C0F0F1 20%, #A0E2EF 39%, #68B5EB 76%, #7CACD2 100%) }
+  
+  @media (min-width: 768px) {
+    .activity-feed { --gc: span 4;  }
+    .calories { --gc: span 2;--gr: span 2; }
+    .challenges { --gc: span 3; }
+    .dashboard { grid-template-columns: repeat(7, 1fr); }
+    .exercise-table { --gc: span 2; --gr: span 2; }
+    .personal-bests { --gc: span 3; }
+    .profile { --gc: span 4; }
+    .schedule-table { --gc: span 3; --gr: span 2; }
+  }

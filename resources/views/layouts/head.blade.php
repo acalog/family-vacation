@@ -26,8 +26,16 @@
         });
     </script>
 
+    <script src="{{ asset('/static/js/dropzone.js') }}"></script>
+
     
     <!-- Styles -->
     <link href="{{ asset('/static/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/css/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/css/gallery.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/css/dashboard.css') }}" rel="stylesheet">
+
+
+
 
 </head>
