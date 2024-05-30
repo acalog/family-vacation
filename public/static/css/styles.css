@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: inherit;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -56,6 +56,10 @@ body {
   width: 100%;
   height: 650px;
   background: url('https://assets.caloggero.com/flr-scene-1.jpg') no-repeat center center/cover;
+}
+
+.background-image {
+  height: 100vh;
 }
 
 .floating-box {
@@ -159,3 +163,35 @@ form button[type=submit] {
   border-right-color: #1e4d4e;
   cursor: pointer;
 }
+
+#overlay-container {
+  position: absolute;
+  left: 65%;
+  width: 20%;
+  height: 60%;
+  overflow: hidden;
+  /* margin: 80px 40%; */
+  box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.65);
+}
+
+#overlay{
+  position: absolute;
+  z-index: 2;
+  display: inline-block;
+  padding: 5%;
+  width: 90%;
+  height: 90%;
+  background-color: #fff;
+  opacity: .0;
+}
+
+#overlay:hover{
+  animation: opacityShow 700ms forwards; 
+}
+
+@keyframes opacityShow {
+  0%   {opacity: 0;}
+  100% {opacity: .70;}
+}
+
+
