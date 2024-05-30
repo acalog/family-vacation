@@ -17,7 +17,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
-            return view('content.home');
+            return redirect()->route('home');
         }
 
         return back()->withErrors([

@@ -4,8 +4,8 @@
     color: black;
     position: relative;
     padding: 20px 15px;
-    height: 225px;
-    width: 450px;
+    height: 35px;
+    width: 1000px;
 }
 
 .box.has-advanced-upload {
@@ -46,9 +46,7 @@
     display: none;
 }
 
-.box.has-advanced-upload {
-    width: 500px;
-}
+
 
 .box.has-advanced-upload .box-dragndrop {
     display: inline;

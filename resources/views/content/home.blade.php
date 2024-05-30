@@ -3,11 +3,9 @@
 @section('content')
 @include('content.dashboard')
     <div class="gallery">
-        <div class="gallery__column">
-            @foreach($images as $image)
-                @include('content.figure', ['filename' => $image->filename, 'description' => ''])
-            @endforeach
-        </div>
+        @foreach($columns as $column)
+            @include('content.gallery-column', ['images' => $column])
+        @endforeach
     </div>
     
     
