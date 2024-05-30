@@ -24,4 +24,16 @@ class ActionController extends Controller
             return view('welcome');
         }
     }
+
+    public function showImageDetails(Request $request) {
+        
+        if ($request->has('id'))
+        {
+            $id = $request->input('id');
+
+            $image = Attachment::find($id);
+            
+            return view('content.details')->with(['image' => $image]);
+        }
+    }
 }

@@ -19,9 +19,16 @@ Route::get('/welcome', function () {
 });
 */
 
+Route::get('/details', [ActionController::class, 'showImageDetails'])->name('image.details');
+
 // Authentication
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+
+Route::get('/anthony', [LoginController::class, 'showRegisterForm']);
+Route::get('/kate', [LoginController::class, 'showRegisterForm']);
+Route::get('/barbara', [LoginController::class, 'showRegisterForm']);
+Route::post('/register', [LoginController::class, 'register'])->name('register');
 
 // Media Attachments
 Route::post('/upload', [MediaController::class, 'upload'])->name('upload');

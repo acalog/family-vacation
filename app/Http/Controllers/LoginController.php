@@ -30,4 +30,30 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
+    public function showRegisterForm() 
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request) {
+        $password = $request->input('password');
+        $confirm  = $request->input('confirm');
+        $email    = $request->input('email');
+        $name     = $request->input('name');
+
+        if ($password !== $confirm) {
+            return back()->withErrors([
+                'password' => 'The provided passwords must match',
+            ]);
+        }
+
+        User::updateOrCreate(
+            ['email' => $email, 'name' => $name],
+            ['password' => Hash::make($password)]
+        );
+
+        return redirect()->route('home');
+    }
+
 }
