@@ -126,6 +126,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let uploadingDisplay = document.getElementById('upload-display');
     let uploadsResultsContainer = document.querySelector('.upload-results-container');
 
+    const fileInput = document.getElementById('file');
+    
+
+    fileInput.addEventListener('change', () => {
+        form.classList.add('is-uploading')
+        form.submit();
+    });
+
     if (isAdvancedUpload) {
         form.classList.add('has-advanced-upload');
         console.log('Drag n\' drop enabled.');

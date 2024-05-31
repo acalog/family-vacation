@@ -14,11 +14,10 @@
     </div>
     <div id="overlay-container">
         <div id="overlay">
-            <h1>{{ $image->filename }}</h1>
-            <a href="">Download Link</a>
-            <a href="">Share Links</a>
-            <p>{{ $image->description }}</p>
+            <h1 id="image-title">{{ $image->title }}</h1>
             <p>{{ $image->owner }}</p>
+            @include('content.details-icons')
+            <p>{{ $image->description }}</p>
         </div>
     </div>
     

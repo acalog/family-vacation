@@ -194,4 +194,8 @@ form button[type=submit] {
   100% {opacity: .70;}
 }
 
+.hidden {
+  display: none;
+}
+
 

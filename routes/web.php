@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\AttachmentController;
 
 /*
 Route::get('/welcome', function () {
@@ -32,5 +33,7 @@ Route::post('/register', [LoginController::class, 'register'])->name('register')
 
 // Media Attachments
 Route::post('/upload', [MediaController::class, 'upload'])->name('upload');
+
+Route::post('/edit/title', [AttachmentController::class, 'editTitle'])->name('edit.title');
 
 Route::get('/', [ActionController::class, 'home'])->name('home');

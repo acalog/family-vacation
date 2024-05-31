@@ -16,8 +16,9 @@ class MediaController extends Controller
         foreach($request->file('uploadFile') as $file) {
             $attachment = Attachment::create([
                 'filename' => $file->getClientOriginalName(),
+                'title' => $file->getClientOriginalName(),
                 'type' => $file->getClientOriginalExtension(),
-                'owner' => $user->name 
+                'owner' => $user->name
             ]);
             $attachment->save();
             Storage::disk('s3')->putFileAs('', $file, $file->getClientOriginalName());
