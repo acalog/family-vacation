@@ -35,6 +35,9 @@
 		<label for="t-help" class="toast-icon icon-help"></label>
 		<label for="t-success"  class="toast-icon icon-success"></label>
 		<label for="t-warning"  class="toast-icon icon-warning"></label>
-		<label for="t-error" class="toast-icon icon-error"></label>
+		<a href="{{ route('attachment.delete', ['id' => $id]) }}">
+			<label for="t-error" class="toast-icon icon-error"></label>
+		</a>
+		
 	</div>
 </div>

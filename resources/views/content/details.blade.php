@@ -16,7 +16,7 @@
         <div id="overlay">
             <h1 id="image-title">{{ $image->title }}</h1>
             <p>{{ $image->owner }}</p>
-            @include('content.details-icons')
+            @include('content.details-icons', ['id' => $image->id])
             <p>{{ $image->description }}</p>
         </div>
     </div>
