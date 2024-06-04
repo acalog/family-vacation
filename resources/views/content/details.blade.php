@@ -12,8 +12,12 @@
         </ul>
         <!-- <a href="" class="quote-button">Login</a> -->
     </div>
+    <div class="button-container">
+        <button class="info-button">i</button>
+    </div>
     <div id="overlay-container">
         <div id="overlay">
+            <button class="close-btn">&times;</button>
             <h1 id="image-title">{{ $image->title }}</h1>
             <p>{{ $image->owner }}</p>
             @include('content.details-icons', ['id' => $image->id])
