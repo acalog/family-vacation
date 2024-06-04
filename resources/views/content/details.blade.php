@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<div class="background-image" style="background: url('https://assets.caloggero.com/{{ $image->filename }}') no-repeat center center/cover;">
+<div class="background-image" style="background: url('https://assets.caloggero.com/{{ $image->filename }}') no-repeat center center/contain;">
     <div class="navbar">
         <div class="logo"></div>
         <ul>
