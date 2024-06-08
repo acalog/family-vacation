@@ -57,7 +57,7 @@ class ActionController extends Controller
         // Initialize the cURL multi handle
         $base_url = 'https://bv5hcib5vl.execute-api.us-east-1.amazonaws.com/Prod/resize/';
         $multiHandle = curl_multi_init();
-        $apiKey = 'laoy3M3AnO6MqkJF7uZ3E67HjEUdtZv12pPmj5mx';
+        $apiKey = '';
         // Store individual cURL handles and add them to the multi handle
         $curlHandles = [];
         $rounds = count( $images );
