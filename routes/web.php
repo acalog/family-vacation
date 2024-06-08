@@ -37,5 +37,8 @@ Route::post('/upload', [MediaController::class, 'upload'])->name('upload');
 Route::post('/edit/title', [AttachmentController::class, 'editTitle'])->name('edit.title');
 Route::get('attachment/delete', [AttachmentController::class, 'delete'])->name('attachment.delete');
 Route::delete('attachment/destroy', [AttachmentController::class, 'destroy'])->name('attachment.destroy');
+Route::get('/attachment/download', [AttachmentController::class, 'download'])->name('attachment.download');
+// Thumbnails
+Route::get('/thumbnail/{filename}', [AttachmentController::class, 'thumbnail'])->name('attachment.thumbnail');
 
 Route::get('/', [ActionController::class, 'home'])->name('home');

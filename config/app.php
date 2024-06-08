@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |---------------------------------------------------------------------------
+    | Thumbnail S3 Object Lambda
+    |---------------------------------------------------------------------------
+    |
+    |
+    */
+
+    'thumbnail_url' => env('THUMBNAIL_LAMBDA_URL', ''),
+    'thumbnail_key' => env('THUMBNAIL_LAMBDA_KEY', '')
+
 ];

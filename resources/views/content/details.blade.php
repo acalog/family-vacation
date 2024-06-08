@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<div class="background-image" style="background: url('https://assets.caloggero.com/{{ $image->filename }}') no-repeat center center/contain;">
+<div>
     <div class="navbar">
         <div class="logo"></div>
         <ul>
@@ -15,15 +15,25 @@
     <div class="button-container">
         <button class="info-button">i</button>
     </div>
+    <div class="view-container">
+        <div class="viewer">
+            <img src="{{ url('https://assets.caloggero.com/' . $image->filename) }}" alt="{{ $image->title }}">
+        </div>
+    </div>
     <div id="overlay-container">
         <div id="overlay">
             <button class="close-btn">&times;</button>
             <h1 id="image-title">{{ $image->title }}</h1>
             <p>{{ $image->owner }}</p>
-            @include('content.details-icons', ['id' => $image->id])
+            @include('content.details-icons', ['id' => $image->id, 'filename' => $image->filename])
             <p>{{ $image->description }}</p>
         </div>
     </div>
-    
+
 </div>
+
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('/static/js/details.js') }}"></script>
 @endsection

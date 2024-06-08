@@ -21,9 +21,11 @@
             </ul>
         </div>
     @endif
-    
+
     <!-- Content -->
     @yield('content')
+
+    @yield('scripts')
 
 </body>
 </html>
