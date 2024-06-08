@@ -12,9 +12,7 @@
         </ul>
         <!-- <a href="" class="quote-button">Login</a> -->
     </div>
-    <div class="button-container">
-        <button class="info-button">i</button>
-    </div>
+    @include('content.details.toolbar', ['image' => $image])
     <div class="view-container">
         <div class="viewer">
             <img src="{{ url('https://assets.caloggero.com/' . $image->filename) }}" alt="{{ $image->title }}">

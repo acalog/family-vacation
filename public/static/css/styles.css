@@ -244,4 +244,20 @@ form button[type=submit] {
     right: 25%;
 }
 
+.toolbar {
+    margin: 0;
+}
+
+.toolbar-inner {
+    margin: 0;
+    padding: 0;
+}
+
+.toolbar-title,
+.toolbar .icon-container {
+    display: inline-block;
+    width: 45%;
+}
+
+
 

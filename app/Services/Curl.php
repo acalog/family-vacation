@@ -30,8 +30,7 @@ class Curl {
             return json_decode($response, true);
         } else {
             $err = curl_error($curl);
-            $statusText = 'Error'; // Default status text, you can improve this
-            return $err;
+            return $httpStatus . ': ' . $err;
         }
 
 
