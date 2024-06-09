@@ -245,7 +245,7 @@ form button[type=submit] {
 }
 
 .toolbar {
-    margin: 0;
+    padding: 20px;
 }
 
 .toolbar-inner {
@@ -253,11 +253,13 @@ form button[type=submit] {
     padding: 0;
 }
 
-.toolbar-title,
+
 .toolbar .icon-container {
     display: inline-block;
     width: 45%;
 }
 
+.toolbar-title {
 
+}
 

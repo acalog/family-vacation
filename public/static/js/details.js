@@ -1,14 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const h1 = document.getElementById('image-title');
 
-    document.querySelector('.info-button').addEventListener('click', function () {
-        document.querySelector('#overlay-container').style.display = 'block';
-    })
-
-    document.querySelector('.close-btn').addEventListener('click', function() {
-        document.querySelector('#overlay-container').style.display = 'none';
-    });
-
     h1.addEventListener('click', () => {
         const h1Width = h1.offsetWidth;
         const h1Text = h1.textContent;
@@ -35,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
             // Example usage
-            
+
             const data = {
                 id: id,
                 title: input.value
