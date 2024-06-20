@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('description')->default('');
             $table->string('owner');
+            $table->string('title');
+
         });
     }
 

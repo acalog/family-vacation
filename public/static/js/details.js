@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const h1 = document.getElementById('image-title');
 
     h1.addEventListener('click', () => {
+        const originalText = h1.textContent;
+        console.log(originalText);
         const h1Width = h1.offsetWidth;
         const h1Text = h1.textContent;
 
@@ -16,9 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
         button.textContent = 'Save';
         button.style.width = h1Width + 'px';
 
+        const cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Cancel';
+        cancelButton.style.width = h1Width + 'px';
+
         // Replace h1 with input and button
         h1.parentNode.insertBefore(input, h1);
         h1.parentNode.insertBefore(button, h1);
+        h1.parentNode.insertBefore(cancelButton, h1);
         h1.classList.add('hidden');
 
         // Add button click event to save changes
@@ -41,6 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             input.remove();
             button.remove();
+            h1.classList.remove('hidden');
+        });
+
+        cancelButton.addEventListener('click', () => {
+            h1.textContent = originalText;
+            input.remove();
+            button.remove()
+            cancelButton.remove();
             h1.classList.remove('hidden');
         });
     });
