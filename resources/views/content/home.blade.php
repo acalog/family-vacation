@@ -11,6 +11,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/static/js/gallery.js') }}"></script>
     <script src="{{ asset('/static/js/dropzone.js') }}"></script>
 @endsection

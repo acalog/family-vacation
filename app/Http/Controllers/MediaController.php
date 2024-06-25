@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Attachment;
 use App\Services\FFMpeg;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
@@ -26,6 +27,11 @@ class MediaController extends Controller
             $tempPath = $file->storeAs('public/temp', $filename);
 
             $tempPath = storage_path('app/' . $tempPath);
+
+            $thumbnailPath = storage_path('app/public/temp/thumbnail/') . $filename;
+
+
+            FFMpeg::thumbnail($tempPath, $thumbnailPath);
 
             $metadata = FFMpeg::probe($tempPath);
             if (isset($metadata['width']) && isset($metadata['height'])) {
@@ -47,8 +53,13 @@ class MediaController extends Controller
             ]);
             $attachment->save();
 
-            Storage::disk('lambda')->putFileAs('', $file, $file->getClientOriginalName());
+            Storage::disk('s3')->putFileAs('', $file, $file->getClientOriginalName());
 
+            $thumbnail = File::get($thumbnailPath);
+
+            Storage::disk('s3')->put('thumbnails/' . $filename, $thumbnail);
+
+            Storage::delete('public/temp/thumbnail/' . $file->getClientOriginalName());
             $deleted = Storage::delete('public/temp/' . $file->getClientOriginalName());
         }
         return redirect()->route('home');

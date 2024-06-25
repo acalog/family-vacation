@@ -25,7 +25,7 @@ class ActionController extends Controller
             $columns = array_fill(0, 4, []);
             $total = $images->count();
             // Total images to fully load. The rest will be lazy-loaded.
-            $max_load = 30;
+            $max_load = 90;
             foreach ($images as $index => $image) {
                 if ($index <= $max_load) {
                     $image->loadNow = true;

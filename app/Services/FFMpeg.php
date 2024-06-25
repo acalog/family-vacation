@@ -4,6 +4,16 @@ namespace App\Services;
 
 class FFMpeg
 {
+    public static function thumbnail($filename, $thumbnailOutput) {
+
+        $command = 'ffmpeg -i ';
+        $command .= $filename . ' ';
+        $command .= '-vf scale=-1:500 -update true ';
+        $command .= $thumbnailOutput;
+
+        exec($command, $output, $retval);
+    }
+
     public static function info($filename) {
         $command = 'ffmpeg -i ';
         $command .= $filename . ' ';
