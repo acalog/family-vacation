@@ -15,7 +15,7 @@
     @include('content.details.toolbar', ['image' => $image])
     <div class="view-container">
         <div class="viewer">
-            <img src="{{ url('https://assets.caloggero.com/' . $image->filename) }}" alt="{{ $image->title }}">
+            <img width="{{ $image->width }}" height="{{ $image->height }}" src="{{ url('https://assets.caloggero.com/' . $image->filename) }}" alt="{{ $image->title }}">
         </div>
     </div>
     <div id="overlay-container">

@@ -4,17 +4,27 @@ namespace App\Services;
 
 class FFMpeg
 {
-    public static function thumbnail($filename, $thumbnailOutput) {
+    public static function thumbnail($filename, $thumbnailOutput, $width, $height)
+    {
+        $scale = 'scale=';
 
+        if ($width > $height) {
+            $scale .= floor($width/5) . ':-1';
+        }
+        else {
+            $scale .= '-1:' . floor($height/5);
+        }
         $command = 'ffmpeg -i ';
         $command .= $filename . ' ';
-        $command .= '-vf scale=-1:500 -update true ';
-        $command .= $thumbnailOutput;
+        $command .= '-vf scale=' . $scale . ' -update true ';
+        $command .= $thumbnailOutput . ' 2>&1';
 
         exec($command, $output, $retval);
+
     }
 
-    public static function info($filename) {
+    public static function info($filename)
+    {
         $command = 'ffmpeg -i ';
         $command .= $filename . ' ';
         $command .= '-f ffmetadata - 2>&1';
@@ -23,7 +33,8 @@ class FFMpeg
         dd($output);
     }
 
-    public static function probe($filename) {
+    public static function probe($filename)
+    {
         // ffprobe -v quiet -print_format json -show_format -show_streams input_image.jpg
         $command = 'ffprobe -v quiet -print_format json -show_format -show_streams ';
         $command .= $filename;
@@ -61,7 +72,8 @@ class FFMpeg
         return $results;
     }
 
-    private function gcd($a, $b) {
+    private function gcd($a, $b)
+    {
         while ($b != 0) {
             $t = $b;
             $b = $a % $b;
@@ -70,12 +82,14 @@ class FFMpeg
         return $a;
     }
 
-    private function reduceRatio($width, $height) {
+    private function reduceRatio($width, $height)
+    {
         $gcd = $this->gcd($width, $height);
         return [$width / $gcd, $height / $gcd];
     }
 
-    public function categorizeRatio($width, $height) {
+    public function categorizeRatio($width, $height)
+    {
         // Standard aspect ratios
         $standardRatios = [
             '1:1' => [1, 1],

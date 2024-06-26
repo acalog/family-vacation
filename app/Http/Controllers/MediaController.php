@@ -23,6 +23,7 @@ class MediaController extends Controller
         // Retrieve the currently authenticated user...
         $user = Auth::user();
         foreach($request->file('uploadFile') as $file) {
+
             $filename = $file->getClientOriginalName();
             $tempPath = $file->storeAs('public/temp', $filename);
 
@@ -30,26 +31,25 @@ class MediaController extends Controller
 
             $thumbnailPath = storage_path('app/public/temp/thumbnail/') . $filename;
 
+            $exif = exif_read_data($tempPath);
 
-            FFMpeg::thumbnail($tempPath, $thumbnailPath);
+            $orientation = $exif['Orientation'];
+            $orientation = $exif['Orientation'] == 6 ? 'portrait' : 'landscape';
+            $width = $exif['Orientation'] == 6 ? $exif['ImageLength'] : $exif['ImageWidth'];
+            $height = $exif['Orientation'] == 6 ? $exif['ImageWidth'] : $exif['ImageLength'];
+            FFMpeg::thumbnail($tempPath, $thumbnailPath, $width, $height);
 
-            $metadata = FFMpeg::probe($tempPath);
-            if (isset($metadata['width']) && isset($metadata['height'])) {
-                $aspect_ratio = $this->ffmpeg->categorizeRatio($metadata['width'], $metadata['height']);
-                $metadata['aspect_ratio'] = $aspect_ratio;
-            } else {
-                $metadata['aspect_ratio'] = '';
-            }
+            $aspect_ratio = $this->ffmpeg->categorizeRatio($width, $height);
 
             $attachment = Attachment::create([
                 'filename' => $filename,
                 'title' => $filename,
                 'type' => $file->getClientOriginalExtension(),
                 'owner' => $user->name,
-                'width' => $metadata['width'] ?? 0,
-                'height' => $metadata['height'] ?? 0,
-                'aspect_ratio' => $metadata['aspect_ratio'] ?? '',
-                'display_aspect_ratio' => $metadata['display_aspect_ratio'] ?? '',
+                'width' => $width ?? 0,
+                'height' => $height ?? 0,
+                'aspect_ratio' => $aspect_ratio ?? '',
+                'display_aspect_ratio' => '',
             ]);
             $attachment->save();
 

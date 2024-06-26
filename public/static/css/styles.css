@@ -187,11 +187,6 @@ form button[type=submit] {
     width: 100%;
 }
 
-.viewer img {
-    height: 100%;
-    width: 100%;
-}
-
 #overlay-container {
     display: none;
     position: absolute;
