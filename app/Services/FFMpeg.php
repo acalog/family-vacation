@@ -16,8 +16,8 @@ class FFMpeg
         }
         $command = 'ffmpeg -i ';
         $command .= $filename . ' ';
-        $command .= '-vf scale=' . $scale . ' -update true ';
-        $command .= $thumbnailOutput . ' 2>&1';
+        $command .= '-vf ' . $scale . ' -update true ';
+        $command .= $thumbnailOutput;
 
         exec($command, $output, $retval);
 

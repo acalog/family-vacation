@@ -18,14 +18,15 @@ class ActionController extends Controller
         $this->curlService = $curlService;
     }
 
-    public function home (Request $request) {
+    public function home (Request $request)
+    {
         if (Auth::check()) {
             $images = Attachment::all();
 
             $columns = array_fill(0, 4, []);
             $total = $images->count();
             // Total images to fully load. The rest will be lazy-loaded.
-            $max_load = 90;
+            $max_load = 120;
             foreach ($images as $index => $image) {
                 if ($index <= $max_load) {
                     $image->loadNow = true;
@@ -41,7 +42,8 @@ class ActionController extends Controller
         }
     }
 
-    public function showImageDetails(Request $request) {
+    public function showImageDetails(Request $request)
+    {
 
         if ($request->has('id'))
         {
@@ -53,7 +55,8 @@ class ActionController extends Controller
         }
     }
 
-    public function getThumbnails($images) {
+    public function getThumbnails($images)
+    {
         // Initialize the cURL multi handle
         $base_url = 'https://bv5hcib5vl.execute-api.us-east-1.amazonaws.com/Prod/resize/';
         $multiHandle = curl_multi_init();
