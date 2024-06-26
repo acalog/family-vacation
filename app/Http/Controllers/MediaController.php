@@ -25,22 +25,30 @@ class MediaController extends Controller
         foreach($request->file('uploadFile') as $file) {
 
             $filename = $file->getClientOriginalName();
+
+            // Store image on local disk temporarily.
             $tempPath = $file->storeAs('public/temp', $filename);
 
             $tempPath = storage_path('app/' . $tempPath);
-
-            $thumbnailPath = storage_path('app/public/temp/thumbnail/') . $filename;
+            $thumbnailPath = storage_path('app/public/temp/thumbnail/' . $filename);
 
             $exif = exif_read_data($tempPath);
+            $exifHeaders = ['Orientation', 'ImageLength', 'ImageWidth'];
 
-            $orientation = $exif['Orientation'];
+            $metadata = [];
+            foreach ($exif as $header => $value) {
+                if (in_array($header, $exifHeaders)) {
+                    $metadata[$header] = $value;
+                }
+            }
+
             $orientation = $exif['Orientation'] == 6 ? 'portrait' : 'landscape';
-            $width = $exif['Orientation'] == 6 ? $exif['ImageLength'] : $exif['ImageWidth'];
-            $height = $exif['Orientation'] == 6 ? $exif['ImageWidth'] : $exif['ImageLength'];
+            $width = $orientation == 'portrait' ? $exif['ImageLength'] : $exif['ImageWidth'];
+            $height = $orientation == 'portrait' ? $exif['ImageWidth'] : $exif['ImageLength'];
+
+            // Generate thumbnail
             FFMpeg::thumbnail($tempPath, $thumbnailPath, $width, $height);
-
-            $aspect_ratio = $this->ffmpeg->categorizeRatio($width, $height);
-
+            
             $attachment = Attachment::create([
                 'filename' => $filename,
                 'title' => $filename,
@@ -48,19 +56,20 @@ class MediaController extends Controller
                 'owner' => $user->name,
                 'width' => $width ?? 0,
                 'height' => $height ?? 0,
-                'aspect_ratio' => $aspect_ratio ?? '',
+                'aspect_ratio' => '',
                 'display_aspect_ratio' => '',
             ]);
             $attachment->save();
 
-            Storage::disk('s3')->putFileAs('', $file, $file->getClientOriginalName());
+            Storage::disk('s3')->putFileAs('', $file, $filename);
 
             $thumbnail = File::get($thumbnailPath);
 
             Storage::disk('s3')->put('thumbnails/' . $filename, $thumbnail);
 
-            Storage::delete('public/temp/thumbnail/' . $file->getClientOriginalName());
-            $deleted = Storage::delete('public/temp/' . $file->getClientOriginalName());
+            // Remove temp media files
+            Storage::delete('public/temp/thumbnail/' . $filename);
+            Storage::delete('public/temp/' . $filename);
         }
         return redirect()->route('home');
     }
