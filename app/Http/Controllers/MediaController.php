@@ -45,10 +45,9 @@ class MediaController extends Controller
             $orientation = $exif['Orientation'] == 6 ? 'portrait' : 'landscape';
             $width = $orientation == 'portrait' ? $exif['ImageLength'] : $exif['ImageWidth'];
             $height = $orientation == 'portrait' ? $exif['ImageWidth'] : $exif['ImageLength'];
-
             // Generate thumbnail
             FFMpeg::thumbnail($tempPath, $thumbnailPath, $width, $height);
-
+            $aspect_ratio = $this->ffmpeg->categorizeRatio($width, $height);
             $attachment = Attachment::create([
                 'filename' => $filename,
                 'title' => $filename,
@@ -56,7 +55,7 @@ class MediaController extends Controller
                 'owner' => $user->name,
                 'width' => $width ?? 0,
                 'height' => $height ?? 0,
-                'aspect_ratio' => '',
+                'aspect_ratio' => $aspect_ratio,
                 'display_aspect_ratio' => '',
             ]);
             $attachment->save();
