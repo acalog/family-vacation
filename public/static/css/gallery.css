@@ -1,4 +1,4 @@
-.gallery {
+.gallery__container {
     display: flex;
     padding: 2px;
     transition: .3s;

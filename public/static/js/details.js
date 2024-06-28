@@ -59,6 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
             h1.classList.remove('hidden');
         });
     });
+
+    const tagTyper = document.getElementById('input-tag');
+    tagTyper.addEventListener('keypress', function(event) {
+        let key = event.which || event.keyCode;
+        if (key === 13 || key === 44) {
+            event.preventDefault();
+
+        }
+    });
 });
 
 function createXHR() {

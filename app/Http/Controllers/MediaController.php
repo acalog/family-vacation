@@ -48,7 +48,7 @@ class MediaController extends Controller
 
             // Generate thumbnail
             FFMpeg::thumbnail($tempPath, $thumbnailPath, $width, $height);
-            
+
             $attachment = Attachment::create([
                 'filename' => $filename,
                 'title' => $filename,

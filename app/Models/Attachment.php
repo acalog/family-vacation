@@ -26,4 +26,11 @@ class Attachment extends Model
         'display_aspect_ratio'
     ];
 
+    public function tag()
+    {
+        # Attchment has many tags
+        # Define a many-to-many relationship
+        return $this->belongsToMany('App\Models\Attachment');
+    }
+
 }

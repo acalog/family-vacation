@@ -2,7 +2,8 @@
 
 @section('content')
 @include('content.dashboard')
-    <div class="gallery">
+    @include('content.gallery', ['images' => $images])
+    <div class="gallery__container">
         @foreach($columns as $column)
             @include('content.gallery-column', ['images' => $column])
         @endforeach
